@@ -9,7 +9,6 @@
         content="Films, Séries et Anime en streaming VF/VOSTFR/V-ARAB. La plateforme algérienne du cinéma mondial.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         *,
         *::before,
@@ -840,37 +839,22 @@
             <div class="player-frame-wrap" id="player-wrap"></div>
             <div class="player-footer">
                 <div class="player-title" id="player-title"></div>
-                <div id="source-status" style="font-size:0.75rem; color:var(--gold); margin-bottom:10px; display:none;">
-                    <span class="pulse">●</span> <span id="source-msg">Recherche Premium...</span>
+                
+                <div class="btn-group" id="movie-controls">
+                    <button class="btn active" id="src-1" onclick="setSrc(1)" data-i18n="srcA">Source A 🟢</button>
+                    <button class="btn" id="src-2" onclick="setSrc(2)" data-i18n="srcB">Source B 🟠</button>
+                    <button class="btn btn-cinema" onclick="toggleCinema()" data-i18n="modeCine">🎬 Ciné</button>
+                    <button class="btn" onclick="copyParty()" data-i18n="watchParty">🔗 Party</button>
                 </div>
 
-                <div class="btn-group" id="premium-controls">
-                    <button class="btn active" id="src-premium" onclick="tryPremium()">
-                        💎 OMEGA PREMIUM
-                    </button>
-                    <button class="btn" id="src-free" onclick="tryFree()">
-                        🍃 OMEGA FREE
-                    </button>
-                    <button class="btn" id="src-global" onclick="setSrc(1)">
-                        🌍 GLOBAL BACKUP
-                    </button>
-                </div>
-
-                <div class="btn-group" id="tv-controls" style="display:none; margin-top:10px; width:100%;">
-                    <select id="s-select" class="btn" onchange="upTV()"></select>
-                    <select id="e-select" class="btn" onchange="upTV()"></select>
-                    <button class="btn" onclick="nextEp()">
-                        <span>Suivant</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                    </button>
-                </div>
-
-                <div class="btn-group" id="movie-controls" style="display:none;"></div>
-
-                <div class="btn-group" style="margin-left:auto;">
-                    <button class="btn" onclick="toggleCinema()" id="cinema-link">🎞️ Cinéma</button>
-                    <button class="btn" id="trailer-link">🎬 Trailer</button>
-                    <button class="btn" onclick="copyParty()">🔗 Party</button>
+                <div class="btn-group" id="tv-controls" style="display:none">
+                    <span style="color:var(--text-dim);font-size:.82rem;align-self:center">S.</span>
+                    <select class="btn" id="s-select" onchange="upTV()"></select>
+                    <span style="color:var(--text-dim);font-size:.82rem;align-self:center">E.</span>
+                    <select class="btn" id="e-select" onchange="upTV()"></select>
+                    <button class="btn" onclick="nextEp()" data-i18n="nextEp">⏭️ Suivant</button>
+                    <button class="btn btn-cinema" onclick="toggleCinema()" data-i18n="modeCine">🎬 Ciné</button>
+                    <button class="btn" onclick="copyParty()" data-i18n="watchParty">🔗 Party</button>
                 </div>
             </div>
         </div>
@@ -1203,113 +1187,11 @@
         }
 
         // ════════════════════════════════════════════════════════════════════════════
-        // PLAYER CONTROLS & OMEGA PREMIUM / FREE
+        // PLAYER CONTROLS
         // ════════════════════════════════════════════════════════════════════════════
-        let hlsPlayer = null;
-
-        function resetPlayer() {
-            const wrap = document.getElementById('player-wrap');
-            wrap.innerHTML = '';
-            if (hlsPlayer) {
-                hlsPlayer.destroy();
-                hlsPlayer = null;
-            }
-        }
-
-        async function tryPremium() {
-            resetPlayer();
-            const msgEl = document.getElementById('source-status');
-            const msgTxt = document.getElementById('source-msg');
-            const premiumBtn = document.getElementById('src-premium');
-            const freeBtn = document.getElementById('src-free');
-            const globalBtn = document.getElementById('src-global');
-
-            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
-            premiumBtn.classList.add('active');
-            
-            msgEl.style.display = 'block';
-            msgTxt.textContent = "Recherche sur le réseau OMEGA Premium...";
-
-            const s = document.getElementById('s-select')?.value || 1;
-            const e = document.getElementById('e-select')?.value || 1;
-
-            try {
-                const res = await fetch(`/api/stream/premium?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
-                const data = await res.json();
-
-                if (data.url) {
-                    msgTxt.textContent = `🚀 Flux OMEGA trouvé : ${data.quality} (${data.lang})`;
-                    document.getElementById('player-wrap').innerHTML = `<iframe src="${data.url}" allowfullscreen></iframe>`;
-                    setTimeout(() => msgEl.style.display = 'none', 3000);
-                } else {
-                    throw new Error("Non trouvé");
-                }
-            } catch (err) {
-                msgTxt.textContent = "❌ Indisponible en Premium. Essai OMEGA FREE...";
-                setTimeout(() => tryFree(), 1500);
-            }
-        }
-
-        async function tryFree() {
-            resetPlayer();
-            const msgEl = document.getElementById('source-status');
-            const msgTxt = document.getElementById('source-msg');
-            const freeBtn = document.getElementById('src-free');
-            
-            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
-            freeBtn.classList.add('active');
-
-            msgEl.style.display = 'block';
-            msgTxt.textContent = "🍃 Recherche OMEGA FREE (Zero Ads)...";
-
-            const s = document.getElementById('s-select')?.value || 1;
-            const e = document.getElementById('e-select')?.value || 1;
-
-            try {
-                const res = await fetch(`/api/stream/free?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
-                const data = await res.json();
-
-                if (data.url) {
-                    msgTxt.textContent = "✅ Flux Direct trouvé (Zéro Pub) !";
-                    const container = document.getElementById('player-wrap');
-                    
-                    if (data.url.includes('.m3u8')) {
-                        const video = document.createElement('video');
-                        video.controls = true;
-                        video.style.width = '100%';
-                        video.style.height = '100%';
-                        container.appendChild(video);
-
-                        if (Hls.isSupported()) {
-                            hlsPlayer = new Hls();
-                            hlsPlayer.loadSource(data.url);
-                            hlsPlayer.attachMedia(video);
-                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                            video.src = data.url;
-                        }
-                        video.play();
-                    } else {
-                        container.innerHTML = `<video src="${data.url}" controls style="width:100%;height:100%"></video>`;
-                        container.querySelector('video').play();
-                    }
-                    
-                    setTimeout(() => msgEl.style.display = 'none', 3000);
-                } else {
-                    throw new Error("Non trouvé");
-                }
-            } catch (err) {
-                msgTxt.textContent = "❌ Mode FREE indisponible. Basculement Global...";
-                setTimeout(() => {
-                    msgEl.style.display = 'none';
-                    setSrc(1);
-                }, 2000);
-            }
-        }
-
         function setSrc(n) {
-            resetPlayer();
-            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('src-global').classList.add('active');
+            document.getElementById('src-1').classList.toggle('active', n === 1);
+            document.getElementById('src-2').classList.toggle('active', n === 2);
 
             const s = document.getElementById('s-select')?.value || 1;
             const e = document.getElementById('e-select')?.value || 1;
@@ -1323,6 +1205,8 @@
 
             document.getElementById('player-wrap').innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
         }
+
+        function tryPremium() { setSrc(1); } // Legacy fallback
 
         function upTV() {
             tryPremium();
