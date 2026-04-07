@@ -5,36 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DZ CINE OMEGA 💎 – Films, Séries & Anime</title>
-    <meta name="description" content="Films, Séries et Anime en streaming VF/VOSTFR/V-ARAB. La plateforme algérienne du cinéma mondial.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="Films, Séries et Anime en streaming VF/VOSTFR/V-ARAB. La plateforme algérienne du cinéma mondial.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         :root {
-            --black:      #07080A;
-            --deep:       #0D0F14;
-            --card:       #111319;
+            --black: #07080A;
+            --deep: #0D0F14;
+            --card: #111319;
             --card-hover: #181C25;
-            --border:     rgba(255,255,255,0.06);
-            --gold:       #C9A84C;
-            --gold-dim:   rgba(201,168,76,0.12);
-            --gold-glow:  rgba(201,168,76,0.35);
-            --red:        #E8313C;
-            --green:      #3ECFAA;
-            --text:       #E8E8F0;
-            --text-dim:   rgba(232,232,240,0.45);
-            --nav-h:      68px;
+            --border: rgba(255, 255, 255, 0.06);
+            --gold: #C9A84C;
+            --gold-dim: rgba(201, 168, 76, 0.12);
+            --gold-glow: rgba(201, 168, 76, 0.35);
+            --red: #E8313C;
+            --green: #3ECFAA;
+            --text: #E8E8F0;
+            --text-dim: rgba(232, 232, 240, 0.45);
+            --nav-h: 68px;
         }
 
         /* ── SCROLLBAR ── */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--black); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
 
-        html, body { min-height: 100vh; font-family: 'Outfit', sans-serif; background: var(--black); color: var(--text); overflow-x: hidden; }
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
 
-        body.cinema-mode { overflow: hidden; }
-        body.cinema-mode #main-nav, body.cinema-mode .main-content { opacity: 0; pointer-events: none; transition: opacity 0.5s; }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        html,
+        body {
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            background: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        body.cinema-mode {
+            overflow: hidden;
+        }
+
+        body.cinema-mode #main-nav,
+        body.cinema-mode .main-content {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
 
         /* ════════════════════════════════════════
            NAVIGATION BARRE
@@ -50,12 +82,12 @@
             align-items: center;
             padding: 0 50px;
             gap: 30px;
-            background: linear-gradient(to bottom, rgba(7,8,10,0.98), transparent);
+            background: linear-gradient(to bottom, rgba(7, 8, 10, 0.98), transparent);
             transition: background 0.4s, backdrop-filter 0.4s;
         }
 
         #main-nav.scrolled {
-            background: rgba(7,8,10,0.97);
+            background: rgba(7, 8, 10, 0.97);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
@@ -94,12 +126,15 @@
             border: 1px solid transparent;
         }
 
-        .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
 
         .nav-link.active {
             color: var(--gold);
             background: var(--gold-dim);
-            border-color: rgba(201,168,76,0.25);
+            border-color: rgba(201, 168, 76, 0.25);
         }
 
         /* Langue Switcher */
@@ -120,14 +155,24 @@
             border: 1px solid transparent;
         }
 
-        .lang-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-        .lang-btn.active { color: var(--gold); background: var(--gold-dim); border-color: rgba(201,168,76,0.25); }
+        .lang-btn:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-btn.active {
+            color: var(--gold);
+            background: var(--gold-dim);
+            border-color: rgba(201, 168, 76, 0.25);
+        }
 
         /* Search */
-        .nav-search-wrap { position: relative; }
+        .nav-search-wrap {
+            position: relative;
+        }
 
         #search {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
             padding: 9px 18px 9px 38px;
             border-radius: 10px;
@@ -139,8 +184,15 @@
             transition: all 0.3s;
         }
 
-        #search:focus { border-color: var(--gold); background: rgba(201,168,76,0.05); width: 280px; }
-        #search::placeholder { color: var(--text-dim); }
+        #search:focus {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+            width: 280px;
+        }
+
+        #search::placeholder {
+            color: var(--text-dim);
+        }
 
         .search-icon {
             position: absolute;
@@ -190,7 +242,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(7,8,10,0.1) 0%, rgba(7,8,10,0.6) 60%, var(--black) 100%);
+            background: linear-gradient(to bottom, rgba(7, 8, 10, 0.1) 0%, rgba(7, 8, 10, 0.6) 60%, var(--black) 100%);
             pointer-events: none;
         }
 
@@ -229,7 +281,7 @@
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 168, 76, 0.05);
         }
 
         .player-frame-wrap iframe {
@@ -271,21 +323,25 @@
             cursor: pointer;
             transition: all 0.25s;
             border: 1px solid var(--border);
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text);
         }
 
-        .btn:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.15); color: var(--gold); }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--gold);
+        }
 
         .btn.active {
             background: var(--gold-dim);
-            border-color: rgba(201,168,76,0.4);
+            border-color: rgba(201, 168, 76, 0.4);
             color: var(--gold);
         }
 
         .btn-cinema {
-            background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
-            border-color: rgba(201,168,76,0.4);
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.2), rgba(201, 168, 76, 0.05));
+            border-color: rgba(201, 168, 76, 0.4);
             color: var(--gold);
         }
 
@@ -314,8 +370,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .synopsis-text {
@@ -337,7 +400,9 @@
             transition: opacity 0.2s;
         }
 
-        .trailer-link:hover { opacity: 0.8; }
+        .trailer-link:hover {
+            opacity: 0.8;
+        }
 
         .cast-title {
             font-size: 0.75rem;
@@ -355,7 +420,9 @@
             padding-bottom: 8px;
         }
 
-        .cast-row::-webkit-scrollbar { height: 3px; }
+        .cast-row::-webkit-scrollbar {
+            height: 3px;
+        }
 
         .cast-member {
             flex-shrink: 0;
@@ -372,7 +439,11 @@
             margin-bottom: 6px;
         }
 
-        .cast-member .cast-name { font-size: 0.7rem; line-height: 1.3; color: var(--text-dim); }
+        .cast-member .cast-name {
+            font-size: 0.7rem;
+            line-height: 1.3;
+            color: var(--text-dim);
+        }
 
         /* ════════════════════════════════════════
            MAIN CONTENT (Grille de films)
@@ -415,13 +486,13 @@
             cursor: pointer;
             background: var(--card);
             border: 1px solid var(--border);
-            transition: transform 0.35s cubic-bezier(0.17,0.88,0.32,1.2), box-shadow 0.35s, border-color 0.3s;
+            transition: transform 0.35s cubic-bezier(0.17, 0.88, 0.32, 1.2), box-shadow 0.35s, border-color 0.3s;
         }
 
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.2);
-            border-color: rgba(201,168,76,0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 168, 76, 0.2);
+            border-color: rgba(201, 168, 76, 0.2);
             z-index: 10;
         }
 
@@ -433,7 +504,9 @@
             transition: filter 0.3s;
         }
 
-        .card:hover img { filter: brightness(1.1); }
+        .card:hover img {
+            filter: brightness(1.1);
+        }
 
         /* Score bar */
         .score-bar {
@@ -464,8 +537,16 @@
             margin-top: 6px;
         }
 
-        .card-year { font-size: 0.72rem; color: var(--text-dim); }
-        .card-score { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+        .card-year {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        .card-score {
+            font-size: 0.72rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
 
         /* Badges */
         .badge-new {
@@ -485,20 +566,25 @@
             position: absolute;
             top: 8px;
             left: 8px;
-            background: rgba(7,8,10,0.75);
+            background: rgba(7, 8, 10, 0.75);
             color: var(--gold);
             font-size: 0.65rem;
             font-weight: 700;
             padding: 2px 7px;
             border-radius: 4px;
-            border: 1px solid rgba(201,168,76,0.5);
+            border: 1px solid rgba(201, 168, 76, 0.5);
             letter-spacing: 0.05em;
         }
 
         /* ── SKELETON ── */
         @keyframes shimmer {
-            0%   { background-position: -400px 0; }
-            100% { background-position: 400px 0; }
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
         }
 
         .skeleton-card {
@@ -511,11 +597,21 @@
 
         /* ── ANIMATION ENTRÉE CARDS ── */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .card.animate { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+        .card.animate {
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
+        }
 
         /* ── LOADER INFINITE SCROLL ── */
         #scroll-loader {
@@ -533,14 +629,17 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(7,8,10,0.92);
+            background: rgba(7, 8, 10, 0.92);
             backdrop-filter: blur(20px);
             display: none;
             padding: calc(var(--nav-h) + 30px) 50px 40px;
             overflow-y: auto;
         }
 
-        .search-overlay.open { display: block; animation: fadeUp 0.3s ease; }
+        .search-overlay.open {
+            display: block;
+            animation: fadeUp 0.3s ease;
+        }
 
         .search-close {
             position: fixed;
@@ -548,7 +647,7 @@
             right: 50px;
             padding: 7px 14px;
             border-radius: 8px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
             color: var(--text-dim);
             cursor: pointer;
@@ -558,13 +657,18 @@
             z-index: 10;
         }
 
-        .search-close:hover { color: var(--red); border-color: var(--red); }
+        .search-close:hover {
+            color: var(--red);
+            border-color: var(--red);
+        }
 
         /* ════════════════════════════════════════
            RESPONSIVE – MOBILE
         ════════════════════════════════════════ */
         @media (max-width: 768px) {
-            :root { --nav-h: 58px; }
+            :root {
+                --nav-h: 58px;
+            }
 
             #main-nav {
                 padding: 0 16px;
@@ -575,36 +679,118 @@
                 padding-bottom: 10px;
             }
 
-            .nav-logo { font-size: 1.1rem; }
+            .nav-logo {
+                font-size: 1.1rem;
+            }
 
-            .nav-links { display: none; flex-direction: column; width: 100%; order: 10; padding: 10px 0 6px; gap: 4px; }
-            .nav-links.open { display: flex; }
-            .nav-link { font-size: 0.95rem; padding: 12px 16px; text-align: center; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                order: 10;
+                padding: 10px 0 6px;
+                gap: 4px;
+            }
 
-            .lang-switcher { display: none; }
-            .lang-switcher.open { display: flex; order: 11; width: 100%; justify-content: center; padding-bottom: 10px; }
+            .nav-links.open {
+                display: flex;
+            }
 
-            .nav-search-wrap { display: none; }
-            .nav-search-wrap.open { display: block; width: 100%; order: 9; }
-            #search { width: 100%; }
+            .nav-link {
+                font-size: 0.95rem;
+                padding: 12px 16px;
+                text-align: center;
+            }
 
-            .hamburger { display: flex; margin-left: auto; }
+            .lang-switcher {
+                display: none;
+            }
 
-            #player-container { width: 100%; border-radius: 0; }
-            .player-frame-wrap { border-radius: 0; aspect-ratio: 16/9; }
-            .player-footer { padding: 12px 16px; gap: 8px; flex-direction: column; align-items: stretch; }
-            .btn-group { flex-wrap: wrap; }
-            .btn { flex: 1; text-align: center; padding: 12px; font-size: 0.85rem; }
+            .lang-switcher.open {
+                display: flex;
+                order: 11;
+                width: 100%;
+                justify-content: center;
+                padding-bottom: 10px;
+            }
 
-            .main-content { padding: 20px 16px 60px; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
-            .card img { height: 195px; }
-            .skeleton-card { height: 220px; }
+            .nav-search-wrap {
+                display: none;
+            }
 
-            .details-panel { width: 100%; border-radius: 0; margin: 0 0 20px; }
+            .nav-search-wrap.open {
+                display: block;
+                width: 100%;
+                order: 9;
+            }
 
-            .search-overlay { padding: calc(var(--nav-h) + 20px) 16px 40px; }
-            .search-close { right: 16px; }
+            #search {
+                width: 100%;
+            }
+
+            .hamburger {
+                display: flex;
+                margin-left: auto;
+            }
+
+            #player-container {
+                width: 100%;
+                border-radius: 0;
+            }
+
+            .player-frame-wrap {
+                border-radius: 0;
+                aspect-ratio: 16/9;
+            }
+
+            .player-footer {
+                padding: 12px 16px;
+                gap: 8px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-group {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center;
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .main-content {
+                padding: 20px 16px 60px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+
+            .card img {
+                height: 195px;
+            }
+
+            .skeleton-card {
+                height: 220px;
+            }
+
+            .details-panel {
+                width: 100%;
+                border-radius: 0;
+                margin: 0 0 20px;
+            }
+
+            .search-overlay {
+                padding: calc(var(--nav-h) + 20px) 16px 40px;
+            }
+
+            .search-close {
+                right: 16px;
+            }
         }
     </style>
 </head>
@@ -653,19 +839,34 @@
             <div class="player-frame-wrap" id="player-wrap"></div>
             <div class="player-footer">
                 <div class="player-title" id="player-title"></div>
-                <div class="btn-group" id="movie-controls">
-                    <button class="btn active" id="src-1" onclick="setSrc(1)" data-i18n="srcA">Source A 🟢</button>
-                    <button class="btn" id="src-2" onclick="setSrc(2)" data-i18n="srcB">Source B 🟠</button>
-                    <button class="btn btn-cinema" onclick="toggleCinema()" data-i18n="modeCine">🎬 Ciné</button>
-                    <button class="btn" onclick="copyParty()" data-i18n="watchParty">🔗 Party</button>
+                <div id="source-status" style="font-size:0.75rem; color:var(--gold); margin-bottom:10px; display:none;">
+                    <span class="pulse">●</span> <span id="source-msg">Recherche Premium...</span>
                 </div>
-                <div class="btn-group" id="tv-controls" style="display:none">
-                    <span style="color:var(--text-dim);font-size:.82rem;align-self:center">S.</span>
-                    <select class="btn" id="s-select" onchange="upTV()"></select>
-                    <span style="color:var(--text-dim);font-size:.82rem;align-self:center">E.</span>
-                    <select class="btn" id="e-select" onchange="upTV()"></select>
-                    <button class="btn" onclick="nextEp()" data-i18n="nextEp">⏭️ Suivant</button>
-                    <button class="btn btn-cinema" onclick="toggleCinema()" data-i18n="modeCine">🎬 Ciné</button>
+
+                <div class="btn-group" id="premium-controls">
+                    <button class="btn active" id="src-premium" onclick="tryPremium()">
+                        💎 OMEGA PREMIUM
+                    </button>
+                    <button class="btn" id="src-global" onclick="setSrc(1)">
+                        🌍 GLOBAL BACKUP
+                    </button>
+                </div>
+
+                <div class="btn-group" id="tv-controls" style="display:none; margin-top:10px; width:100%;">
+                    <select id="s-select" class="btn" onchange="upTV()"></select>
+                    <select id="e-select" class="btn" onchange="upTV()"></select>
+                    <button class="btn" onclick="nextEp()">
+                        <span>Suivant</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+                <div class="btn-group" id="movie-controls" style="display:none;"></div>
+
+                <div class="btn-group" style="margin-left:auto;">
+                    <button class="btn" onclick="toggleCinema()" id="cinema-link">🎞️ Cinéma</button>
+                    <button class="btn" id="trailer-link">🎬 Trailer</button>
+                    <button class="btn" onclick="copyParty()">🔗 Party</button>
                 </div>
             </div>
         </div>
@@ -702,208 +903,208 @@
     </div>
 
     <script>
-    // ════════════════════════════════════════════════════════════════════════════
-    // DICTIONNAIRE I18N
-    // ════════════════════════════════════════════════════════════════════════════
-    const DICT = {
-        fr: {
-            movies:"FILMS", series:"SÉRIES", anime:"ANIME", surprise:"🎲 SURPRISE",
-            searchPh:"Rechercher...", heroMsg:"Sélectionne un film ou une série",
-            srcA:"Source A 🟢", srcB:"Source B 🟠",
-            modeCine:"🎬 Ciné", watchParty:"🔗 Party",
-            nextEp:"⏭️ Suivant", trailer:"▶ Voir la bande-annonce", cast:"Casting Principal",
-            trends:"Tendances", loadMore:"Fais défiler pour la suite...",
-            watchNow:"▶ REGARDER", closeSearch:"✖ Fermer", searchRes:"Résultats 🔍",
-            leaveCine:"✖ Quitter le Ciné",
-            copyAlert:"Lien Watch Party copié ! Envoie-le à tes amis.",
-            season:"Saison", episode:"Ép."
-        },
-        en: {
-            movies:"MOVIES", series:"SERIES", anime:"ANIME", surprise:"🎲 SURPRISE",
-            searchPh:"Search...", heroMsg:"Select a movie or series",
-            srcA:"Source A 🟢", srcB:"Source B 🟠",
-            modeCine:"🎬 Cinema", watchParty:"🔗 Party",
-            nextEp:"⏭️ Next", trailer:"▶ Watch Trailer", cast:"Main Cast",
-            trends:"Trending", loadMore:"Scroll for more...",
-            watchNow:"▶ WATCH", closeSearch:"✖ Close", searchRes:"Results 🔍",
-            leaveCine:"✖ Exit Cinema",
-            copyAlert:"Watch Party link copied! Send it to your friends.",
-            season:"Season", episode:"Ep."
-        },
-        ar: {
-            movies:"أفلام", series:"مسلسلات", anime:"أنمي", surprise:"🎲 مفاجأة",
-            searchPh:"...ابحث", heroMsg:"اختر فيلمًا أو مسلسلًا",
-            srcA:"المصدر أ 🟢", srcB:"المصدر ب 🟠",
-            modeCine:"🎬 وضع السينما", watchParty:"🔗 مشاهدة جماعية",
-            nextEp:"⏭️ التالي", trailer:"▶ مشاهدة الإعلان", cast:"طاقم التمثيل",
-            trends:"الأكثر رواجاً", loadMore:"مرر للمزيد...",
-            watchNow:"▶ شاهد الآن", closeSearch:"✖ إغلاق", searchRes:"نتائج البحث 🔍",
-            leaveCine:"✖ خروج من السينما",
-            copyAlert:"تم نسخ الرابط! أرسله لأصدقائك.",
-            season:"الموسم", episode:"حلقة"
-        },
-        es: {
-            movies:"PELÍCULAS", series:"SERIES", anime:"ANIME", surprise:"🎲 SORPRESA",
-            searchPh:"Buscar...", heroMsg:"Selecciona una película o serie",
-            srcA:"Fuente A 🟢", srcB:"Fuente B 🟠",
-            modeCine:"🎬 Cine", watchParty:"🔗 Watch Party",
-            nextEp:"⏭️ Siguiente", trailer:"▶ Ver Tráiler", cast:"Reparto Principal",
-            trends:"Tendencias", loadMore:"Desplázate para más...",
-            watchNow:"▶ VER AHORA", closeSearch:"✖ Cerrar", searchRes:"Resultados 🔍",
-            leaveCine:"✖ Salir del Cine",
-            copyAlert:"¡Enlace copiado! Envíalo a tus amigos.",
-            season:"Temporada", episode:"Ep."
-        },
-        pt: {
-            movies:"FILMES", series:"SÉRIES", anime:"ANIME", surprise:"🎲 SURPRESA",
-            searchPh:"Pesquisar...", heroMsg:"Selecione um filme ou série",
-            srcA:"Fonte A 🟢", srcB:"Fonte B 🟠",
-            modeCine:"🎬 Cinema", watchParty:"🔗 Watch Party",
-            nextEp:"⏭️ Próximo", trailer:"▶ Ver Trailer", cast:"Elenco Principal",
-            trends:"Tendências", loadMore:"Role para mais...",
-            watchNow:"▶ ASSISTIR", closeSearch:"✖ Fechar", searchRes:"Resultados 🔍",
-            leaveCine:"✖ Sair do Cinema",
-            copyAlert:"Link copiado! Envie para seus amigos.",
-            season:"Temporada", episode:"Ep."
+        // ════════════════════════════════════════════════════════════════════════════
+        // DICTIONNAIRE I18N
+        // ════════════════════════════════════════════════════════════════════════════
+        const DICT = {
+            fr: {
+                movies: "FILMS", series: "SÉRIES", anime: "ANIME", surprise: "🎲 SURPRISE",
+                searchPh: "Rechercher...", heroMsg: "Sélectionne un film ou une série",
+                srcA: "Source A 🟢", srcB: "Source B 🟠",
+                modeCine: "🎬 Ciné", watchParty: "🔗 Party",
+                nextEp: "⏭️ Suivant", trailer: "▶ Voir la bande-annonce", cast: "Casting Principal",
+                trends: "Tendances", loadMore: "Fais défiler pour la suite...",
+                watchNow: "▶ REGARDER", closeSearch: "✖ Fermer", searchRes: "Résultats 🔍",
+                leaveCine: "✖ Quitter le Ciné",
+                copyAlert: "Lien Watch Party copié ! Envoie-le à tes amis.",
+                season: "Saison", episode: "Ép."
+            },
+            en: {
+                movies: "MOVIES", series: "SERIES", anime: "ANIME", surprise: "🎲 SURPRISE",
+                searchPh: "Search...", heroMsg: "Select a movie or series",
+                srcA: "Source A 🟢", srcB: "Source B 🟠",
+                modeCine: "🎬 Cinema", watchParty: "🔗 Party",
+                nextEp: "⏭️ Next", trailer: "▶ Watch Trailer", cast: "Main Cast",
+                trends: "Trending", loadMore: "Scroll for more...",
+                watchNow: "▶ WATCH", closeSearch: "✖ Close", searchRes: "Results 🔍",
+                leaveCine: "✖ Exit Cinema",
+                copyAlert: "Watch Party link copied! Send it to your friends.",
+                season: "Season", episode: "Ep."
+            },
+            ar: {
+                movies: "أفلام", series: "مسلسلات", anime: "أنمي", surprise: "🎲 مفاجأة",
+                searchPh: "...ابحث", heroMsg: "اختر فيلمًا أو مسلسلًا",
+                srcA: "المصدر أ 🟢", srcB: "المصدر ب 🟠",
+                modeCine: "🎬 وضع السينما", watchParty: "🔗 مشاهدة جماعية",
+                nextEp: "⏭️ التالي", trailer: "▶ مشاهدة الإعلان", cast: "طاقم التمثيل",
+                trends: "الأكثر رواجاً", loadMore: "مرر للمزيد...",
+                watchNow: "▶ شاهد الآن", closeSearch: "✖ إغلاق", searchRes: "نتائج البحث 🔍",
+                leaveCine: "✖ خروج من السينما",
+                copyAlert: "تم نسخ الرابط! أرسله لأصدقائك.",
+                season: "الموسم", episode: "حلقة"
+            },
+            es: {
+                movies: "PELÍCULAS", series: "SERIES", anime: "ANIME", surprise: "🎲 SORPRESA",
+                searchPh: "Buscar...", heroMsg: "Selecciona una película o serie",
+                srcA: "Fuente A 🟢", srcB: "Fuente B 🟠",
+                modeCine: "🎬 Cine", watchParty: "🔗 Watch Party",
+                nextEp: "⏭️ Siguiente", trailer: "▶ Ver Tráiler", cast: "Reparto Principal",
+                trends: "Tendencias", loadMore: "Desplázate para más...",
+                watchNow: "▶ VER AHORA", closeSearch: "✖ Cerrar", searchRes: "Resultados 🔍",
+                leaveCine: "✖ Salir del Cine",
+                copyAlert: "¡Enlace copiado! Envíalo a tus amigos.",
+                season: "Temporada", episode: "Ep."
+            },
+            pt: {
+                movies: "FILMES", series: "SÉRIES", anime: "ANIME", surprise: "🎲 SURPRESA",
+                searchPh: "Pesquisar...", heroMsg: "Selecione um filme ou série",
+                srcA: "Fonte A 🟢", srcB: "Fonte B 🟠",
+                modeCine: "🎬 Cinema", watchParty: "🔗 Watch Party",
+                nextEp: "⏭️ Próximo", trailer: "▶ Ver Trailer", cast: "Elenco Principal",
+                trends: "Tendências", loadMore: "Role para mais...",
+                watchNow: "▶ ASSISTIR", closeSearch: "✖ Fechar", searchRes: "Resultados 🔍",
+                leaveCine: "✖ Sair do Cinema",
+                copyAlert: "Link copiado! Envie para seus amigos.",
+                season: "Temporada", episode: "Ep."
+            }
+        };
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // STATE
+        // ════════════════════════════════════════════════════════════════════════════
+        let cType = 'movie', page = 1, cId = null, query = '', loading = false;
+        let currentLang = localStorage.getItem('dz-lang') ||
+            (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('fr') ? 'fr' : 'en');
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // LANGUE & I18N
+        // ════════════════════════════════════════════════════════════════════════════
+        function setLang(l) {
+            currentLang = l;
+            localStorage.setItem('dz-lang', l);
+            document.documentElement.lang = l;
+            document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            const el = document.getElementById('lang-' + l);
+            if (el) el.classList.add('active');
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (DICT[l] && DICT[l][key]) el.textContent = DICT[l][key];
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
+                if (DICT[l] && DICT[l][key]) el.placeholder = DICT[l][key];
+            });
+
+            load(true);
         }
-    };
 
-    // ════════════════════════════════════════════════════════════════════════════
-    // STATE
-    // ════════════════════════════════════════════════════════════════════════════
-    let cType = 'movie', page = 1, cId = null, query = '', loading = false;
-    let currentLang = localStorage.getItem('dz-lang') ||
-        (navigator.language.startsWith('ar') ? 'ar' : navigator.language.startsWith('fr') ? 'fr' : 'en');
+        function t(key) { return (DICT[currentLang] && DICT[currentLang][key]) || key; }
 
-    // ════════════════════════════════════════════════════════════════════════════
-    // LANGUE & I18N
-    // ════════════════════════════════════════════════════════════════════════════
-    function setLang(l) {
-        currentLang = l;
-        localStorage.setItem('dz-lang', l);
-        document.documentElement.lang = l;
-        document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        // ════════════════════════════════════════════════════════════════════════════
+        // NAVIGATION
+        // ════════════════════════════════════════════════════════════════════════════
+        function goHome() { location.reload(); }
 
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        const el = document.getElementById('lang-' + l);
-        if (el) el.classList.add('active');
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (DICT[l] && DICT[l][key]) el.textContent = DICT[l][key];
-        });
-        document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-            const key = el.getAttribute('data-i18n-ph');
-            if (DICT[l] && DICT[l][key]) el.placeholder = DICT[l][key];
-        });
-
-        load(true);
-    }
-
-    function t(key) { return (DICT[currentLang] && DICT[currentLang][key]) || key; }
-
-    // ════════════════════════════════════════════════════════════════════════════
-    // NAVIGATION
-    // ════════════════════════════════════════════════════════════════════════════
-    function goHome() { location.reload(); }
-
-    function toggleMenu() {
-        const links    = document.getElementById('nav-links');
-        const langs    = document.getElementById('lang-switcher');
-        const searchWr = document.getElementById('nav-search-wrap');
-        const open     = links.classList.contains('open');
-        links.classList.toggle('open', !open);
-        langs.classList.toggle('open', !open);
-        searchWr.classList.toggle('open', !open);
-    }
-
-    function switchType(type) {
-        cType = type;
-        cId = null;
-        document.getElementById('player-container').style.display = 'none';
-        document.getElementById('hero-placeholder').style.display = 'flex';
-        document.getElementById('details-panel').style.display = 'none';
-        ['movie','tv','anime'].forEach(t => {
-            const el = document.getElementById('link-' + t);
-            if (el) el.classList.toggle('active', t === type);
-        });
-        const titles = { movie: t('movies'), tv: t('series'), anime: t('anime') };
-        document.getElementById('section-title').textContent = titles[type] || '';
-        load(true);
-    }
-
-    // ════════════════════════════════════════════════════════════════════════════
-    // SCROLL & NAV
-    // ════════════════════════════════════════════════════════════════════════════
-    window.addEventListener('scroll', () => {
-        document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800 && !loading && !query) {
-            page++;
-            load();
+        function toggleMenu() {
+            const links = document.getElementById('nav-links');
+            const langs = document.getElementById('lang-switcher');
+            const searchWr = document.getElementById('nav-search-wrap');
+            const open = links.classList.contains('open');
+            links.classList.toggle('open', !open);
+            langs.classList.toggle('open', !open);
+            searchWr.classList.toggle('open', !open);
         }
-    });
 
-    // ════════════════════════════════════════════════════════════════════════════
-    // CHARGEMENT DES CONTENUS
-    // ════════════════════════════════════════════════════════════════════════════
-    function showSkeletons(targetId, count = 10) {
-        const grid = document.getElementById(targetId);
-        for (let i = 0; i < count; i++) {
-            const s = document.createElement('div');
-            s.className = 'skeleton-card';
-            grid.appendChild(s);
+        function switchType(type) {
+            cType = type;
+            cId = null;
+            document.getElementById('player-container').style.display = 'none';
+            document.getElementById('hero-placeholder').style.display = 'flex';
+            document.getElementById('details-panel').style.display = 'none';
+            ['movie', 'tv', 'anime'].forEach(t => {
+                const el = document.getElementById('link-' + t);
+                if (el) el.classList.toggle('active', t === type);
+            });
+            const titles = { movie: t('movies'), tv: t('series'), anime: t('anime') };
+            document.getElementById('section-title').textContent = titles[type] || '';
+            load(true);
         }
-    }
 
-    function hideSkeletons(targetId) {
-        document.querySelectorAll(`#${targetId} .skeleton-card`).forEach(s => s.remove());
-    }
+        // ════════════════════════════════════════════════════════════════════════════
+        // SCROLL & NAV
+        // ════════════════════════════════════════════════════════════════════════════
+        window.addEventListener('scroll', () => {
+            document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800 && !loading && !query) {
+                page++;
+                load();
+            }
+        });
 
-    async function load(reset = false) {
-        if (loading) return;
-        loading = true;
-        const targetId = query ? 'search-grid' : 'grid';
+        // ════════════════════════════════════════════════════════════════════════════
+        // CHARGEMENT DES CONTENUS
+        // ════════════════════════════════════════════════════════════════════════════
+        function showSkeletons(targetId, count = 10) {
+            const grid = document.getElementById(targetId);
+            for (let i = 0; i < count; i++) {
+                const s = document.createElement('div');
+                s.className = 'skeleton-card';
+                grid.appendChild(s);
+            }
+        }
 
-        try {
-            if (reset) { page = 1; document.getElementById(targetId).innerHTML = ''; }
-            showSkeletons(targetId);
+        function hideSkeletons(targetId) {
+            document.querySelectorAll(`#${targetId} .skeleton-card`).forEach(s => s.remove());
+        }
 
-            const url = `/api/data?type=${cType}&page=${page}&q=${encodeURIComponent(query)}&lang=${currentLang}`;
-            const res  = await fetch(url);
-            const data = await res.json();
+        async function load(reset = false) {
+            if (loading) return;
+            loading = true;
+            const targetId = query ? 'search-grid' : 'grid';
 
-            hideSkeletons(targetId);
-            if (!Array.isArray(data)) return;
+            try {
+                if (reset) { page = 1; document.getElementById(targetId).innerHTML = ''; }
+                showSkeletons(targetId);
 
-            // Hero Banner dynamique
-            if (reset && page === 1 && !query && data.length > 0 && !cId) {
-                const top = data[0];
-                if (top.backdrop_path) {
-                    document.body.style.backgroundImage = `linear-gradient(to bottom,rgba(7,8,10,0.4),var(--black)),url(https://image.tmdb.org/t/p/original${top.backdrop_path})`;
-                    document.body.style.backgroundSize  = 'cover';
-                    document.body.style.backgroundAttachment = 'fixed';
-                    document.getElementById('hero-msg').innerHTML = `
+                const url = `/api/data?type=${cType}&page=${page}&q=${encodeURIComponent(query)}&lang=${currentLang}`;
+                const res = await fetch(url);
+                const data = await res.json();
+
+                hideSkeletons(targetId);
+                if (!Array.isArray(data)) return;
+
+                // Hero Banner dynamique
+                if (reset && page === 1 && !query && data.length > 0 && !cId) {
+                    const top = data[0];
+                    if (top.backdrop_path) {
+                        document.body.style.backgroundImage = `linear-gradient(to bottom,rgba(7,8,10,0.4),var(--black)),url(https://image.tmdb.org/t/p/original${top.backdrop_path})`;
+                        document.body.style.backgroundSize = 'cover';
+                        document.body.style.backgroundAttachment = 'fixed';
+                        document.getElementById('hero-msg').innerHTML = `
                         <h1 style="font-size:clamp(1.6rem,4vw,3rem);margin:0;background:linear-gradient(135deg,#C9A84C,#F2D98A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${top.title}</h1>
                         <p style="color:var(--text-dim);max-width:550px;text-align:center;margin:10px 24px;font-size:.9rem;line-height:1.65">${(top.overview || '').slice(0, 140)}...</p>
                         <button onclick="select(${top.id},'${top.backdrop_path}')" style="margin-top:12px;padding:12px 32px;border-radius:10px;font-family:Outfit,sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,#C9A84C,#F2D98A);color:#07080A;box-shadow:0 6px 30px rgba(201,168,76,.4)">
                             ${t('watchNow')}
                         </button>
                     `;
+                    }
                 }
-            }
 
-            // Rendu des cartes
-            const grid = document.getElementById(targetId);
-            data.forEach((m, idx) => {
-                if (!m.poster_path) return;
-                const year = (m.release_date || '').split('-')[0];
-                const isNew = ['2024','2025','2026'].includes(year);
-                const scoreColor = m.vote_average >= 7 ? 'var(--green)' : m.vote_average >= 5 ? 'var(--gold)' : 'var(--red)';
+                // Rendu des cartes
+                const grid = document.getElementById(targetId);
+                data.forEach((m, idx) => {
+                    if (!m.poster_path) return;
+                    const year = (m.release_date || '').split('-')[0];
+                    const isNew = ['2024', '2025', '2026'].includes(year);
+                    const scoreColor = m.vote_average >= 7 ? 'var(--green)' : m.vote_average >= 5 ? 'var(--gold)' : 'var(--red)';
 
-                const card = document.createElement('div');
-                card.className = 'card animate';
-                card.style.animationDelay = `${(idx % 20) * 0.04}s`;
-                card.innerHTML = `
+                    const card = document.createElement('div');
+                    card.className = 'card animate';
+                    card.style.animationDelay = `${(idx % 20) * 0.04}s`;
+                    card.innerHTML = `
                     ${isNew ? '<span class="badge-new">NEW</span>' : ''}
                     <span class="badge-quality">4K</span>
                     <img src="https://image.tmdb.org/t/p/w400${m.poster_path}" alt="${m.title}" loading="lazy">
@@ -916,209 +1117,210 @@
                         </div>
                     </div>
                 `;
-                card.onclick = () => {
-                    if (query) closeSearch();
-                    select(m.id, m.backdrop_path);
-                };
-                grid.appendChild(card);
-            });
+                    card.onclick = () => {
+                        if (query) closeSearch();
+                        select(m.id, m.backdrop_path);
+                    };
+                    grid.appendChild(card);
+                });
 
-        } catch (err) {
-            console.error('Erreur chargement:', err);
-            hideSkeletons(query ? 'search-grid' : 'grid');
-        } finally {
-            loading = false;
-        }
-    }
-
-    // ════════════════════════════════════════════════════════════════════════════
-    // SÉLECTION D'UN CONTENU
-    // ════════════════════════════════════════════════════════════════════════════
-    async function select(id, bg) {
-        cId = id;
-        if (bg) {
-            document.body.style.backgroundImage = `linear-gradient(to bottom,rgba(7,8,10,0.6),var(--black)),url(https://image.tmdb.org/t/p/original${bg})`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundAttachment = 'fixed';
+            } catch (err) {
+                console.error('Erreur chargement:', err);
+                hideSkeletons(query ? 'search-grid' : 'grid');
+            } finally {
+                loading = false;
+            }
         }
 
-        document.getElementById('hero-placeholder').style.display = 'none';
-        document.getElementById('player-container').style.display = 'block';
+        // ════════════════════════════════════════════════════════════════════════════
+        // SÉLECTION D'UN CONTENU
+        // ════════════════════════════════════════════════════════════════════════════
+        async function select(id, bg) {
+            cId = id;
+            if (bg) {
+                document.body.style.backgroundImage = `linear-gradient(to bottom,rgba(7,8,10,0.6),var(--black)),url(https://image.tmdb.org/t/p/original${bg})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundAttachment = 'fixed';
+            }
 
-        const apiType = cType === 'anime' ? 'movie' : cType;
-        const res = await fetch(`/api/details?id=${id}&type=${apiType}&lang=${currentLang}`);
-        const d   = await res.json();
+            document.getElementById('hero-placeholder').style.display = 'none';
+            document.getElementById('player-container').style.display = 'block';
 
-        document.getElementById('player-title').textContent = d.title || '';
+            const apiType = cType === 'anime' ? 'movie' : cType;
+            const res = await fetch(`/api/details?id=${id}&type=${apiType}&lang=${currentLang}`);
+            const d = await res.json();
 
-        // Synopsis + Casting
-        document.getElementById('synopsis').textContent = d.overview || '';
-        document.getElementById('cast').innerHTML = (d.credits?.cast || []).map(a => `
+            document.getElementById('player-title').textContent = d.title || '';
+
+            // Synopsis + Casting
+            document.getElementById('synopsis').textContent = d.overview || '';
+            document.getElementById('cast').innerHTML = (d.credits?.cast || []).map(a => `
             <div class="cast-member">
                 <img src="https://image.tmdb.org/t/p/w200${a.profile_path}" alt="${a.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22%23333%22/><text x=%2230%22 y=%2235%22 text-anchor=%22middle%22 fill=%22%23888%22 font-size=%2220%22>?</text></svg>'">
                 <div class="cast-name">${a.name}</div>
             </div>
         `).join('');
-        document.getElementById('details-panel').style.display = 'block';
+            document.getElementById('details-panel').style.display = 'block';
 
-        // Trailer
-        const trailer = (d.videos?.results || []).find(v => v.type === 'Trailer');
-        const trailerEl = document.getElementById('trailer-link');
-        trailerEl.textContent = t('trailer');
-        if (trailer) {
-            trailerEl.onclick = () => {
-                document.getElementById('player-wrap').innerHTML = `<iframe src="https://www.youtube.com/embed/${trailer.key}?autoplay=1" allowfullscreen></iframe>`;
-            };
-        } else {
-            trailerEl.style.display = 'none';
-        }
-
-        // Contrôles Player
-        if (cType === 'tv') {
-            document.getElementById('movie-controls').style.display = 'none';
-            document.getElementById('tv-controls').style.display = 'flex';
-            document.getElementById('s-select').innerHTML = (d.seasons || []).map(s =>
-                `<option value="${s.season_number}">${t('season')} ${s.season_number}</option>`
-            ).join('');
-            
-            // Populate episodes (default to 30 if count unknown)
-            const eEl = document.getElementById('e-select');
-            eEl.innerHTML = Array.from({ length: 30 }, (_, i) =>
-                `<option value="${i+1}">${t('episode')} ${i+1}</option>`
-            ).join('');
-            
-            tryPremium();
-        } else {
-            document.getElementById('tv-controls').style.display = 'none';
-            document.getElementById('movie-controls').style.display = 'none';
-            tryPremium();
-        }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ════════════════════════════════════════════════════════════════════════════
-    // PLAYER CONTROLS & OMEGA PREMIUM
-    // ════════════════════════════════════════════════════════════════════════════
-    async function tryPremium() {
-        const msgEl = document.getElementById('source-status');
-        const msgTxt = document.getElementById('source-msg');
-        const premiumBtn = document.getElementById('src-premium');
-        const globalBtn = document.getElementById('src-global');
-
-        premiumBtn.classList.add('active');
-        globalBtn.classList.remove('active');
-        msgEl.style.display = 'block';
-        msgTxt.textContent = "Recherche sur le réseau OMEGA Premium...";
-
-        const s = document.getElementById('s-select')?.value || 1;
-        const e = document.getElementById('e-select')?.value || 1;
-        
-        try {
-            const res = await fetch(`/api/stream/premium?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
-            const data = await res.json();
-
-            if (data.url) {
-                msgTxt.textContent = `🚀 Flux OMEGA trouvé : ${data.quality} (${data.lang})`;
-                document.getElementById('player-wrap').innerHTML = `<iframe src="${data.url}" allowfullscreen></iframe>`;
-                setTimeout(() => msgEl.style.display = 'none', 3000);
+            // Trailer
+            const trailer = (d.videos?.results || []).find(v => v.type === 'Trailer');
+            const trailerEl = document.getElementById('trailer-link');
+            trailerEl.textContent = t('trailer');
+            if (trailer) {
+                trailerEl.onclick = () => {
+                    document.getElementById('player-wrap').innerHTML = `<iframe src="https://www.youtube.com/embed/${trailer.key}?autoplay=1" allowfullscreen></iframe>`;
+                };
             } else {
-                throw new Error("Non trouvé");
+                trailerEl.style.display = 'none';
             }
-        } catch (err) {
-            msgTxt.textContent = "❌ Indisponible en Premium. Basculement Global...";
-            setTimeout(() => {
-                msgEl.style.display = 'none';
-                setSrc(1);
-            }, 2000);
-        }
-    }
 
-    function setSrc(n) {
-        document.getElementById('src-premium').classList.remove('active');
-        document.getElementById('src-global').classList.add('active');
-        
-        const s = document.getElementById('s-select')?.value || 1;
-        const e = document.getElementById('e-select')?.value || 1;
+            // Contrôles Player
+            if (cType === 'tv') {
+                document.getElementById('movie-controls').style.display = 'none';
+                document.getElementById('tv-controls').style.display = 'flex';
+                document.getElementById('s-select').innerHTML = (d.seasons || []).map(s =>
+                    `<option value="${s.season_number}">${t('season')} ${s.season_number}</option>`
+                ).join('');
 
-        let url = "";
-        if (cType === 'movie') {
-            url = n === 1 ? `https://vidsrc.me/embed/movie?tmdb=${cId}` : `https://vidsrc.xyz/embed/movie/${cId}`;
-        } else {
-            url = `https://vidsrc.me/embed/tv?tmdb=${cId}&sea=${s}&epi=${e}`;
-        }
-        
-        document.getElementById('player-wrap').innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
-    }
+                // Populate episodes (default to 30 if count unknown)
+                const eEl = document.getElementById('e-select');
+                eEl.innerHTML = Array.from({ length: 30 }, (_, i) =>
+                    `<option value="${i + 1}">${t('episode')} ${i + 1}</option>`
+                ).join('');
 
-    function upTV() {
-        tryPremium();
-    }
-
-    function nextEp() {
-        const e = document.getElementById('e-select');
-        if (e.selectedIndex < e.options.length - 1) { e.selectedIndex++; upTV(); }
-    }
-
-    function toggleCinema() {
-        document.body.classList.toggle('cinema-mode');
-        const existing = document.getElementById('cinema-btn');
-        if (document.body.classList.contains('cinema-mode')) {
-            if (!existing) {
-                const b = document.createElement('button');
-                b.id = 'cinema-btn';
-                b.textContent = t('leaveCine');
-                Object.assign(b.style, {
-                    position:'fixed', top:'20px', right:'20px', zIndex:'9999',
-                    padding:'10px 20px', background:'var(--red)', color:'white',
-                    border:'none', borderRadius:'8px', cursor:'pointer',
-                    fontFamily:'Outfit,sans-serif', fontWeight:'700'
-                });
-                b.onclick = () => { document.body.classList.remove('cinema-mode'); b.remove(); };
-                document.body.appendChild(b);
+                tryPremium();
+            } else {
+                document.getElementById('tv-controls').style.display = 'none';
+                document.getElementById('movie-controls').style.display = 'none';
+                tryPremium();
             }
-        } else if (existing) existing.remove();
-    }
 
-    function copyParty() {
-        navigator.clipboard.writeText(window.location.origin + '/home?id=' + cId);
-        alert(t('copyAlert'));
-    }
-
-    function getSurprise() {
-        const cards = document.querySelectorAll('#grid .card');
-        if (cards.length) cards[Math.floor(Math.random() * cards.length)].click();
-    }
-
-    // ════════════════════════════════════════════════════════════════════════════
-    // SEARCH
-    // ════════════════════════════════════════════════════════════════════════════
-    document.getElementById('search').addEventListener('input', e => {
-        query = e.target.value.trim();
-        if (query.length > 2) {
-            document.getElementById('search-overlay').classList.add('open');
-            load(true);
-        } else if (!query) {
-            closeSearch();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    });
 
-    function closeSearch() {
-        document.getElementById('search-overlay').classList.remove('open');
-        document.getElementById('search').value = '';
-        query = '';
-    }
+        // ════════════════════════════════════════════════════════════════════════════
+        // PLAYER CONTROLS & OMEGA PREMIUM
+        // ════════════════════════════════════════════════════════════════════════════
+        async function tryPremium() {
+            const msgEl = document.getElementById('source-status');
+            const msgTxt = document.getElementById('source-msg');
+            const premiumBtn = document.getElementById('src-premium');
+            const globalBtn = document.getElementById('src-global');
 
-    // ════════════════════════════════════════════════════════════════════════════
-    // INIT
-    // ════════════════════════════════════════════════════════════════════════════
-    window.addEventListener('load', () => {
-        setLang(currentLang);
+            premiumBtn.classList.add('active');
+            globalBtn.classList.remove('active');
+            msgEl.style.display = 'block';
+            msgTxt.textContent = "Recherche sur le réseau OMEGA Premium...";
 
-        // Watch Party URL support
-        const id = new URLSearchParams(location.search).get('id');
-        if (id) select(parseInt(id), '');
-    });
+            const s = document.getElementById('s-select')?.value || 1;
+            const e = document.getElementById('e-select')?.value || 1;
+
+            try {
+                const res = await fetch(`/api/stream/premium?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
+                const data = await res.json();
+
+                if (data.url) {
+                    msgTxt.textContent = `🚀 Flux OMEGA trouvé : ${data.quality} (${data.lang})`;
+                    document.getElementById('player-wrap').innerHTML = `<iframe src="${data.url}" allowfullscreen></iframe>`;
+                    setTimeout(() => msgEl.style.display = 'none', 3000);
+                } else {
+                    throw new Error("Non trouvé");
+                }
+            } catch (err) {
+                msgTxt.textContent = "❌ Indisponible en Premium. Basculement Global...";
+                setTimeout(() => {
+                    msgEl.style.display = 'none';
+                    setSrc(1);
+                }, 2000);
+            }
+        }
+
+        function setSrc(n) {
+            document.getElementById('src-premium').classList.remove('active');
+            document.getElementById('src-global').classList.add('active');
+
+            const s = document.getElementById('s-select')?.value || 1;
+            const e = document.getElementById('e-select')?.value || 1;
+
+            let url = "";
+            if (cType === 'movie') {
+                url = n === 1 ? `https://vidsrc.me/embed/movie?tmdb=${cId}` : `https://vidsrc.xyz/embed/movie/${cId}`;
+            } else {
+                url = `https://vidsrc.me/embed/tv?tmdb=${cId}&sea=${s}&epi=${e}`;
+            }
+
+            document.getElementById('player-wrap').innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
+        }
+
+        function upTV() {
+            tryPremium();
+        }
+
+        function nextEp() {
+            const e = document.getElementById('e-select');
+            if (e.selectedIndex < e.options.length - 1) { e.selectedIndex++; upTV(); }
+        }
+
+        function toggleCinema() {
+            document.body.classList.toggle('cinema-mode');
+            const existing = document.getElementById('cinema-btn');
+            if (document.body.classList.contains('cinema-mode')) {
+                if (!existing) {
+                    const b = document.createElement('button');
+                    b.id = 'cinema-btn';
+                    b.textContent = t('leaveCine');
+                    Object.assign(b.style, {
+                        position: 'fixed', top: '20px', right: '20px', zIndex: '9999',
+                        padding: '10px 20px', background: 'var(--red)', color: 'white',
+                        border: 'none', borderRadius: '8px', cursor: 'pointer',
+                        fontFamily: 'Outfit,sans-serif', fontWeight: '700'
+                    });
+                    b.onclick = () => { document.body.classList.remove('cinema-mode'); b.remove(); };
+                    document.body.appendChild(b);
+                }
+            } else if (existing) existing.remove();
+        }
+
+        function copyParty() {
+            navigator.clipboard.writeText(window.location.origin + '/home?id=' + cId);
+            alert(t('copyAlert'));
+        }
+
+        function getSurprise() {
+            const cards = document.querySelectorAll('#grid .card');
+            if (cards.length) cards[Math.floor(Math.random() * cards.length)].click();
+        }
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // SEARCH
+        // ════════════════════════════════════════════════════════════════════════════
+        document.getElementById('search').addEventListener('input', e => {
+            query = e.target.value.trim();
+            if (query.length > 2) {
+                document.getElementById('search-overlay').classList.add('open');
+                load(true);
+            } else if (!query) {
+                closeSearch();
+            }
+        });
+
+        function closeSearch() {
+            document.getElementById('search-overlay').classList.remove('open');
+            document.getElementById('search').value = '';
+            query = '';
+        }
+
+        // ════════════════════════════════════════════════════════════════════════════
+        // INIT
+        // ════════════════════════════════════════════════════════════════════════════
+        window.addEventListener('load', () => {
+            setLang(currentLang);
+
+            // Watch Party URL support
+            const id = new URLSearchParams(location.search).get('id');
+            if (id) select(parseInt(id), '');
+        });
     </script>
 </body>
+
 </html>
