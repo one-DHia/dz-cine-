@@ -50,4 +50,31 @@ async function getAkwamDownloadLink(pageUrl) {
     }
 }
 
-module.exports = { searchAkwam, getAkwamDownloadLink };
+async function resolveDirectLink(downloadUrl) {
+    try {
+        // Akwam download links often go through a redirection page.
+        // We need to fetch that page and find the actual "Download" button or wait for redirection.
+        const { data: html, request } = await axios.get(downloadUrl, { 
+            maxRedirects: 5,
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36' }
+        });
+        
+        const $ = cheerio.load(html);
+        
+        // Strategy 1: Look for a direct video source or a button with a direct link
+        const directLink = $('a.download-link').attr('href') || $('source').attr('src') || $('video').attr('src');
+        
+        if (directLink) return directLink;
+
+        // Strategy 2: Check if we are already redirected to a file
+        const finalUrl = request.res.responseUrl || downloadUrl;
+        if (finalUrl.match(/\.(mp4|mkv|m3u8|webm)$/i)) return finalUrl;
+
+        return null;
+    } catch (e) {
+        console.error(`[Akwam] Resolution failed for ${downloadUrl}: ${e.message}`);
+        return null;
+    }
+}
+
+module.exports = { searchAkwam, getAkwamDownloadLink, resolveDirectLink };

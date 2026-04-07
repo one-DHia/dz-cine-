@@ -23,6 +23,11 @@
   to = "/.netlify/functions/stream-premium"
   status = 200
 
+[[redirects]]
+  from = "/api/stream/free"
+  to = "/.netlify/functions/stream-free"
+  status = 200
+
 # La racine pointe vers login.html
 [[redirects]]
   from = "/"

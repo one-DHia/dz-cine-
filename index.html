@@ -9,6 +9,7 @@
         content="Films, Séries et Anime en streaming VF/VOSTFR/V-ARAB. La plateforme algérienne du cinéma mondial.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         *,
         *::before,
@@ -847,6 +848,9 @@
                     <button class="btn active" id="src-premium" onclick="tryPremium()">
                         💎 OMEGA PREMIUM
                     </button>
+                    <button class="btn" id="src-free" onclick="tryFree()">
+                        🍃 OMEGA FREE
+                    </button>
                     <button class="btn" id="src-global" onclick="setSrc(1)">
                         🌍 GLOBAL BACKUP
                     </button>
@@ -1199,16 +1203,30 @@
         }
 
         // ════════════════════════════════════════════════════════════════════════════
-        // PLAYER CONTROLS & OMEGA PREMIUM
+        // PLAYER CONTROLS & OMEGA PREMIUM / FREE
         // ════════════════════════════════════════════════════════════════════════════
+        let hlsPlayer = null;
+
+        function resetPlayer() {
+            const wrap = document.getElementById('player-wrap');
+            wrap.innerHTML = '';
+            if (hlsPlayer) {
+                hlsPlayer.destroy();
+                hlsPlayer = null;
+            }
+        }
+
         async function tryPremium() {
+            resetPlayer();
             const msgEl = document.getElementById('source-status');
             const msgTxt = document.getElementById('source-msg');
             const premiumBtn = document.getElementById('src-premium');
+            const freeBtn = document.getElementById('src-free');
             const globalBtn = document.getElementById('src-global');
 
+            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
             premiumBtn.classList.add('active');
-            globalBtn.classList.remove('active');
+            
             msgEl.style.display = 'block';
             msgTxt.textContent = "Recherche sur le réseau OMEGA Premium...";
 
@@ -1227,7 +1245,60 @@
                     throw new Error("Non trouvé");
                 }
             } catch (err) {
-                msgTxt.textContent = "❌ Indisponible en Premium. Basculement Global...";
+                msgTxt.textContent = "❌ Indisponible en Premium. Essai OMEGA FREE...";
+                setTimeout(() => tryFree(), 1500);
+            }
+        }
+
+        async function tryFree() {
+            resetPlayer();
+            const msgEl = document.getElementById('source-status');
+            const msgTxt = document.getElementById('source-msg');
+            const freeBtn = document.getElementById('src-free');
+            
+            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
+            freeBtn.classList.add('active');
+
+            msgEl.style.display = 'block';
+            msgTxt.textContent = "🍃 Recherche OMEGA FREE (Zero Ads)...";
+
+            const s = document.getElementById('s-select')?.value || 1;
+            const e = document.getElementById('e-select')?.value || 1;
+
+            try {
+                const res = await fetch(`/api/stream/free?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
+                const data = await res.json();
+
+                if (data.url) {
+                    msgTxt.textContent = "✅ Flux Direct trouvé (Zéro Pub) !";
+                    const container = document.getElementById('player-wrap');
+                    
+                    if (data.url.includes('.m3u8')) {
+                        const video = document.createElement('video');
+                        video.controls = true;
+                        video.style.width = '100%';
+                        video.style.height = '100%';
+                        container.appendChild(video);
+
+                        if (Hls.isSupported()) {
+                            hlsPlayer = new Hls();
+                            hlsPlayer.loadSource(data.url);
+                            hlsPlayer.attachMedia(video);
+                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                            video.src = data.url;
+                        }
+                        video.play();
+                    } else {
+                        container.innerHTML = `<video src="${data.url}" controls style="width:100%;height:100%"></video>`;
+                        container.querySelector('video').play();
+                    }
+                    
+                    setTimeout(() => msgEl.style.display = 'none', 3000);
+                } else {
+                    throw new Error("Non trouvé");
+                }
+            } catch (err) {
+                msgTxt.textContent = "❌ Mode FREE indisponible. Basculement Global...";
                 setTimeout(() => {
                     msgEl.style.display = 'none';
                     setSrc(1);
@@ -1236,7 +1307,8 @@
         }
 
         function setSrc(n) {
-            document.getElementById('src-premium').classList.remove('active');
+            resetPlayer();
+            document.querySelectorAll('#premium-controls .btn').forEach(b => b.classList.remove('active'));
             document.getElementById('src-global').classList.add('active');
 
             const s = document.getElementById('s-select')?.value || 1;
