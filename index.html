@@ -980,37 +980,79 @@
             document.getElementById('s-select').innerHTML = (d.seasons || []).map(s =>
                 `<option value="${s.season_number}">${t('season')} ${s.season_number}</option>`
             ).join('');
-            upTV();
+            
+            // Populate episodes (default to 30 if count unknown)
+            const eEl = document.getElementById('e-select');
+            eEl.innerHTML = Array.from({ length: 30 }, (_, i) =>
+                `<option value="${i+1}">${t('episode')} ${i+1}</option>`
+            ).join('');
+            
+            tryPremium();
         } else {
             document.getElementById('tv-controls').style.display = 'none';
-            document.getElementById('movie-controls').style.display = 'flex';
-            setSrc(1);
+            document.getElementById('movie-controls').style.display = 'none';
+            tryPremium();
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // ════════════════════════════════════════════════════════════════════════════
-    // PLAYER CONTROLS
+    // PLAYER CONTROLS & OMEGA PREMIUM
     // ════════════════════════════════════════════════════════════════════════════
+    async function tryPremium() {
+        const msgEl = document.getElementById('source-status');
+        const msgTxt = document.getElementById('source-msg');
+        const premiumBtn = document.getElementById('src-premium');
+        const globalBtn = document.getElementById('src-global');
+
+        premiumBtn.classList.add('active');
+        globalBtn.classList.remove('active');
+        msgEl.style.display = 'block';
+        msgTxt.textContent = "Recherche sur le réseau OMEGA Premium...";
+
+        const s = document.getElementById('s-select')?.value || 1;
+        const e = document.getElementById('e-select')?.value || 1;
+        
+        try {
+            const res = await fetch(`/api/stream/premium?id=${cId}&type=${cType}&season=${s}&episode=${e}`);
+            const data = await res.json();
+
+            if (data.url) {
+                msgTxt.textContent = `🚀 Flux OMEGA trouvé : ${data.quality} (${data.lang})`;
+                document.getElementById('player-wrap').innerHTML = `<iframe src="${data.url}" allowfullscreen></iframe>`;
+                setTimeout(() => msgEl.style.display = 'none', 3000);
+            } else {
+                throw new Error("Non trouvé");
+            }
+        } catch (err) {
+            msgTxt.textContent = "❌ Indisponible en Premium. Basculement Global...";
+            setTimeout(() => {
+                msgEl.style.display = 'none';
+                setSrc(1);
+            }, 2000);
+        }
+    }
+
     function setSrc(n) {
-        document.querySelectorAll('#movie-controls .btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(`src-${n}`)?.classList.add('active');
-        const url = n === 1
-            ? `https://vidsrc.me/embed/movie?tmdb=${cId}`
-            : `https://vidsrc.xyz/embed/movie/${cId}`;
-        document.getElementById('player-wrap').innerHTML = `<iframe src="${url}" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>`;
+        document.getElementById('src-premium').classList.remove('active');
+        document.getElementById('src-global').classList.add('active');
+        
+        const s = document.getElementById('s-select')?.value || 1;
+        const e = document.getElementById('e-select')?.value || 1;
+
+        let url = "";
+        if (cType === 'movie') {
+            url = n === 1 ? `https://vidsrc.me/embed/movie?tmdb=${cId}` : `https://vidsrc.xyz/embed/movie/${cId}`;
+        } else {
+            url = `https://vidsrc.me/embed/tv?tmdb=${cId}&sea=${s}&epi=${e}`;
+        }
+        
+        document.getElementById('player-wrap').innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
     }
 
     function upTV() {
-        const s = document.getElementById('s-select').value;
-        const eEl = document.getElementById('e-select');
-        if (!eEl.innerHTML) {
-            eEl.innerHTML = Array.from({ length: 30 }, (_, i) =>
-                `<option value="${i+1}">${t('episode')} ${i+1}</option>`
-            ).join('');
-        }
-        document.getElementById('player-wrap').innerHTML = `<iframe src="https://vidsrc.me/embed/tv?tmdb=${cId}&sea=${s}&epi=${eEl.value}" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms"></iframe>`;
+        tryPremium();
     }
 
     function nextEp() {

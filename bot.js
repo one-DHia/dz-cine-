@@ -11,7 +11,7 @@ puppeteer.use(StealthPlugin());
 // ⚙️ CONFIGURATION
 // ==========================================
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TMDB_KEY = process.env.TMDB_API_KEY || '223a4126b1687919598ced5db50bb2d7';
+const TMDB_KEY = process.env.TMDB_KEY || process.env.TMDB_API_KEY;
 
 const bot = new Telegraf(BOT_TOKEN);
 

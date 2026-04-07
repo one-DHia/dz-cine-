@@ -18,6 +18,11 @@
   to = "/.netlify/functions/sources"
   status = 200
 
+[[redirects]]
+  from = "/api/stream/premium"
+  to = "/.netlify/functions/stream-premium"
+  status = 200
+
 # La racine pointe vers login.html
 [[redirects]]
   from = "/"
