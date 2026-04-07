@@ -48,7 +48,7 @@ jobs:
 🔴 Le robot de traduction a échoué !
 
 📅 Date : $(date -u '+%Y-%m-%d %H:%M UTC')
-🔗 Voir les logs : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+   Voir les logs : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \

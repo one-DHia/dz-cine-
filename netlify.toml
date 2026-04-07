@@ -13,30 +13,8 @@
   to = "/.netlify/functions/details"
   status = 200
 
-[[redirects]]
-  from = "/api/sources"
-  to = "/.netlify/functions/sources"
-  status = 200
-
-# La racine pointe vers la landing page
+# La racine pointe vers l'index principal (Catalogue)
 [[redirects]]
   from = "/"
   to = "/index.html"
-  status = 200
-
-# Pages d'authentification
-[[redirects]]
-  from = "/login"
-  to = "/login.html"
-  status = 200
-
-[[redirects]]
-  from = "/signup"
-  to = "/signup.html"
-  status = 200
-
-# Le catalogue principal
-[[redirects]]
-  from = "/home"
-  to = "/home.html"
   status = 200
