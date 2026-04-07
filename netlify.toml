@@ -1,0 +1,31 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Rediriger les appels API vers les fonctions serverless
+[[redirects]]
+  from = "/api/data"
+  to = "/.netlify/functions/data"
+  status = 200
+
+[[redirects]]
+  from = "/api/details"
+  to = "/.netlify/functions/details"
+  status = 200
+
+[[redirects]]
+  from = "/api/sources"
+  to = "/.netlify/functions/sources"
+  status = 200
+
+# La racine pointe vers login.html
+[[redirects]]
+  from = "/"
+  to = "/login.html"
+  status = 200
+
+# /home pointe vers index.html
+[[redirects]]
+  from = "/home"
+  to = "/index.html"
+  status = 200

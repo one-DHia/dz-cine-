@@ -1,0 +1,70 @@
+name: 🤖 DZ CINE OMEGA - Robot de Traduction
+
+on:
+  # Exécution automatique : 2x par jour (à 06h00 et 18h00 UTC)
+  schedule:
+    - cron: '0 6 * * *'
+    - cron: '0 18 * * *'
+  # Permettre de lancer manuellement depuis GitHub
+  workflow_dispatch:
+
+jobs:
+  translate:
+    name: Scan TMDB & Traduit vers Supabase
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Limite à 30 min pour éviter les facturations excessives
+
+    steps:
+      # 1. Récupérer le code du projet
+      - name: ⬇️ Checkout du code
+        uses: actions/checkout@v4
+
+      # 2. Configurer Python
+      - name: 🐍 Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Installer les dépendances Python
+      - name: 📦 Installer les dépendances
+        run: |
+          pip install --upgrade pip
+          pip install requests python-dotenv
+
+      # 4. Lancer le robot (les secrets sont injectés comme variables d'env)
+      - name: 🤖 Lancer le Robot de Traduction
+        env:
+          TMDB_KEY: ${{ secrets.TMDB_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python translator_robot.py
+
+      # 5. (SEULEMENT EN CAS D'ÉCHEC) Envoyer une alerte Telegram
+      - name: 🚨 Alerte Telegram - Échec du Robot
+        if: failure()
+        run: |
+          MESSAGE="⚠️ *DZ CINE OMEGA - ALERTE ROBOT*
+
+🔴 Le robot de traduction a échoué !
+
+📅 Date : $(date -u '+%Y-%m-%d %H:%M UTC')
+🔗 Voir les logs : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "text=${MESSAGE}" \
+            -d "parse_mode=Markdown"
+
+      # 6. (EN CAS DE SUCCÈS) Notification optionnelle de confirmation
+      - name: ✅ Notification Telegram - Succès
+        if: success()
+        run: |
+          MESSAGE="✅ *DZ CINE OMEGA - Robot OK*
+
+La mise à jour du catalogue est terminée avec succès.
+📅 $(date -u '+%Y-%m-%d %H:%M UTC')"
+
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "text=${MESSAGE}" \
+            -d "parse_mode=Markdown"
