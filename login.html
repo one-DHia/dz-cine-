@@ -10,10 +10,12 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --red: #E50914;
-            --black: #000000;
-            --dark: #141414;
+            --cyan: #00E5FF;
+            --indigo: #070810;
+            --deep: #0D0F1A;
             --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
             --gold: #C9A84C;
         }
 
@@ -21,121 +23,175 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('netflix_landing_bg_collage_1775582034685.png');
-            background-size: cover;
-            background-position: center;
+            background-color: var(--indigo);
+            overflow: hidden;
             color: var(--white);
             height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
-        .header { padding: 25px 50px; }
-        .logo { font-size: 2rem; font-weight: 900; color: var(--gold); text-decoration: none; }
+        /* ── BACKGROUND ── */
+        .bg-scene {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
+        }
+
+        .cyber-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        }
+
+        /* ── HEADER ── */
+        .header { padding: 40px 60px; }
+        .logo { 
+            display: flex; align-items: center; gap: 10px; 
+            text-decoration: none; color: white; font-size: 1.5rem; font-weight: 800; 
+        }
+        .logo img { width: 32px; height: 32px; }
 
         .container {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 80px;
+            padding-bottom: 100px;
         }
 
         .login-card {
-            background: rgba(0,0,0,0.75);
-            padding: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(50px);
+            padding: 50px;
             width: 100%;
-            max-width: 450px;
-            border-radius: 4px;
+            max-width: 440px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            animation: card-show 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .title { font-size: 2rem; font-weight: 700; margin-bottom: 28px; }
+        @keyframes card-show {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .form-group { margin-bottom: 16px; }
+        .title { font-size: 2rem; font-weight: 800; margin-bottom: 10px; text-align: center; }
+        .subtitle { font-size: 0.9rem; color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 30px; }
+
+        .form-group { margin-bottom: 16px; position: relative; }
 
         .input {
             width: 100%;
             padding: 16px 20px;
-            background: #333;
-            border: none;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             color: white;
             font-size: 1rem;
             outline: none;
+            transition: 0.3s;
         }
 
-        .input:focus { background: #454545; }
+        .input:focus { border-color: var(--cyan); background: rgba(0, 229, 255, 0.03); }
 
         .btn-submit {
             width: 100%;
-            padding: 16px;
-            background: var(--red);
-            color: white;
+            padding: 18px;
+            background: var(--cyan);
+            color: var(--indigo);
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
             cursor: pointer;
             margin-top: 24px;
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            transition: 0.3s;
         }
 
-        .btn-submit:hover { background: #b20710; }
+        .btn-submit:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 15px 40px rgba(0, 229, 255, 0.4); 
+        }
 
         .card-footer {
-            margin-top: 15px;
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
-            color: #b3b3b3;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
         }
 
         .signup-now {
             margin-top: 40px;
-            color: #737373;
-            font-size: 1rem;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.95rem;
         }
 
         .signup-now a {
-            color: white;
+            color: var(--cyan);
             text-decoration: none;
+            font-weight: 600;
         }
 
         .signup-now a:hover { text-decoration: underline; }
 
-        .status-msg { margin-top: 10px; font-size: 0.85rem; text-align: center; }
-        .error { color: var(--red); }
-        .success { color: #46d369; }
+        .status-msg { margin-top: 15px; font-size: 0.85rem; text-align: center; border-radius: 8px; padding: 10px; }
+        .error { background: rgba(255,0,0,0.1); color: #ff5555; border: 1px solid rgba(255,0,0,0.2); }
+        .success { background: rgba(0,255,0,0.1); color: #55ff55; border: 1px solid rgba(0,255,0,0.2); }
     </style>
 </head>
 <body>
 
+    <div class="bg-scene"></div>
+    <div class="cyber-grid"></div>
+
     <div class="header">
-        <a href="index.html" class="logo">DZ CINE OMEGA</a>
+        <a href="index.html" class="logo">
+            <img src="omega_hologram_icon_1775582871635.png" alt="Omega">
+            <span>OMEGA</span>
+        </a>
     </div>
 
     <div class="container">
         <div class="login-card">
-            <h1 class="title">S'identifier</h1>
+            <h1 class="title">Accès Membre</h1>
+            <p class="subtitle">Entrez vos identifiants OMEGA pour continuer.</p>
             
             <div id="panel-signin">
                 <div class="form-group">
-                    <input class="input" type="email" id="signin-email" placeholder="E-mail ou numéro de téléphone">
+                    <input class="input" type="email" id="signin-email" placeholder="E-mail">
                 </div>
                 <div class="form-group">
                     <input class="input" type="password" id="signin-password" placeholder="Mot de passe">
                 </div>
                 <button class="btn-submit" id="btn-signin" onclick="handleSignIn()">
-                    S'identifier
+                    S'IDENTIFIER
                 </button>
                 <div class="status-msg" id="signin-status"></div>
                 
                 <div class="card-footer">
-                    <label><input type="checkbox" checked> Se souvenir de moi</label>
-                    <a href="#" style="color:#b3b3b3; text-decoration:none;">Besoin d'aide ?</a>
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" checked style="accent-color: var(--cyan);"> 
+                        Session persistante
+                    </label>
+                    <a href="#" style="color:var(--cyan); text-decoration:none;">Aide ?</a>
                 </div>
 
                 <div class="signup-now">
-                    Première visite sur DZ CINE ? <a href="signup.html">Inscrivez-vous maintenant</a>.
+                    Nouveau chez OMEGA ? <a href="signup.html">Rejoindre le club</a>
                 </div>
             </div>
         </div>

@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DZ CINE OMEGA – S'inscrire</title>
+    <title>OMEGA – Rejoindre le Club</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red: #E50914;
-            --black: #000000;
-            --dark: #141414;
+            --cyan: #00E5FF;
+            --indigo: #070810;
+            --deep: #0D0F1A;
             --white: #ffffff;
-            --grey: #333333;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--black);
+            background-color: var(--indigo);
             color: var(--white);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .header {
-            padding: 25px 50px;
-            border-bottom: 1px solid #333;
+        /* ── BACKGROUND ── */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at center, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #C9A84C;
-            text-decoration: none;
-        }
+        .header { padding: 40px 60px; border-bottom: 1px solid var(--border); }
+        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:white; font-size:1.5rem; font-weight:800; }
+        .logo img { width:32px; height:32px; }
 
         .container {
             flex: 1;
@@ -45,75 +48,87 @@
             padding: 40px 20px;
         }
 
-        .signup-card {
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            padding: 50px;
             width: 100%;
-            max-width: 440px;
-            padding: 40px;
-            text-align: left;
+            max-width: 500px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .step { font-size: 0.8rem; margin-bottom: 10px; color: #777; font-weight: 600; }
-        .title { font-size: 2rem; font-weight: 700; margin-bottom: 20px; }
-        .sub { font-size: 1.1rem; margin-bottom: 25px; line-height: 1.4; }
+        @keyframes slide-up { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 
-        .form-group { margin-bottom: 20px; }
+        .steps { font-size: 0.75rem; color: var(--cyan); font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; }
+        .title { font-size: 2.2rem; font-weight: 900; margin-bottom: 15px; line-height: 1.1; }
+        .sub { color: rgba(255,255,255,0.5); margin-bottom: 30px; font-size: 0.95rem; }
+
+        .form-group { margin-bottom: 18px; }
         .input {
             width: 100%;
-            padding: 15px;
-            font-size: 1rem;
-            background: transparent;
-            border: 1px solid #555;
-            border-radius: 4px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             color: white;
             outline: none;
+            transition: 0.3s;
         }
-        .input:focus { border-color: #0071eb; }
+        .input:focus { border-color: var(--cyan); background: rgba(0, 222, 255, 0.05); }
 
-        .btn-submit {
+        .btn {
             width: 100%;
-            padding: 20px;
-            background: var(--red);
-            color: white;
+            padding: 18px;
+            background: var(--cyan);
+            color: var(--indigo);
             border: none;
-            border-radius: 4px;
-            font-size: 1.5rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
             cursor: pointer;
             margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+            transition: 0.3s;
         }
-        .btn-submit:hover { background: #b20710; }
 
-        footer {
-            background: #f3f3f3;
-            color: #737373;
-            padding: 30px 50px;
-            border-top: 1px solid #dcdcdc;
-        }
-        
-        footer a { color: inherit; text-decoration: none; margin-right: 20px; font-size: 0.85rem; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0, 229, 255, 0.4); }
+
+        .footer-link { margin-top: 25px; text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.3); }
+        .footer-link a { color: var(--cyan); text-decoration: none; }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow"></div>
+
     <header class="header">
-        <a href="index.html" class="logo">DZ CINE OMEGA</a>
+        <a href="index.html" class="logo">
+            <img src="omega_hologram_icon_1775582871635.png" alt="Omega">
+            <span>OMEGA</span>
+        </a>
     </header>
 
     <div class="container">
-        <div class="signup-card">
-            <p class="step">ÉTAPE 1 SUR 3</p>
-            <h1 class="title">Choisissez votre mot de passe pour commencer votre adhésion.</h1>
-            <p class="sub">Plus que quelques étapes et c'est fini ! Nous aussi, nous détestons la paperasse.</p>
+        <div class="card">
+            <p class="steps">ÉTAPE 01 / 03</p>
+            <h1 class="title">Bienvenue dans l'adhésion d'élite.</h1>
+            <p class="sub">Libérez toute la puissance du streaming HD sans publicité dès maintenant.</p>
             
             <form onsubmit="event.preventDefault(); window.location.href='home.html'">
                 <div class="form-group">
-                    <input type="email" class="input" placeholder="E-mail" required>
+                    <input type="email" class="input" placeholder="Adresse e-mail" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="input" placeholder="Ajouter un mot de passe" required>
+                    <input type="password" class="input" placeholder="Choisir un mot de passe" required>
                 </div>
-                <button type="submit" class="btn-submit">Suivant</button>
+                <button type="submit" class="btn">CONTINUER</button>
             </form>
+
+            <div class="footer-link">
+                Déjà membre ? <a href="login.html">S'identifier</a>
+            </div>
         </div>
     </div>
 
