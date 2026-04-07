@@ -10,399 +10,135 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --black:    #07080A;
-            --deep:     #0D0F14;
-            --card:     #12151C;
-            --border:   rgba(255,255,255,0.07);
-            --gold:     #C9A84C;
-            --gold-dim: rgba(201,168,76,0.15);
-            --gold-glow:rgba(201,168,76,0.4);
-            --red:      #E8313C;
-            --text:     #E8E8F0;
-            --text-dim: rgba(232,232,240,0.45);
+            --red: #E50914;
+            --black: #000000;
+            --dark: #141414;
+            --white: #ffffff;
+            --gold: #C9A84C;
         }
 
-        html, body {
-            min-height: 100vh;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
             font-family: 'Outfit', sans-serif;
-            background: var(--black);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        /* ── BACKGROUND CINÉMATOGRAPHIQUE ── */
-        .bg-scene {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-scene::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 80% at 80% 20%, rgba(232,49,60,0.05) 0%, transparent 60%),
-                linear-gradient(160deg, #07080A 0%, #0D0F14 40%, #07080A 100%);
-        }
-
-        /* Particules dorées animées */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--gold);
-            opacity: 0;
-            animation: float-up linear infinite;
-        }
-
-        @keyframes float-up {
-            0%   { opacity: 0; transform: translateY(0) scale(0); }
-            10%  { opacity: 0.6; }
-            90%  { opacity: 0.2; }
-            100% { opacity: 0; transform: translateY(-100vh) scale(1.5); }
-        }
-
-        /* Ligne horizontale lumineuse */
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            opacity: 0.15;
-            animation: scan 12s ease-in-out infinite;
-        }
-        @keyframes scan {
-            0%   { top: 0%; opacity: 0; }
-            10%  { opacity: 0.15; }
-            90%  { opacity: 0.15; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        /* ── LAYOUT PRINCIPAL ── */
-        .layout {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('netflix_landing_bg_collage_1775582034685.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        .header { padding: 25px 50px; }
+        .logo { font-size: 2rem; font-weight: 900; color: var(--gold); text-decoration: none; }
+
+        .container {
+            flex: 1;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 30px 20px;
+            padding-bottom: 80px;
         }
 
-        /* ── LOGO ── */
-        .logo-wrap {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo-omega {
-            font-size: clamp(2.4rem, 8vw, 4rem);
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            background: linear-gradient(135deg, #C9A84C 0%, #F2D98A 40%, #C9A84C 70%, #A07830 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 30px rgba(201,168,76,0.5));
-            animation: logo-pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes logo-pulse {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
-            50%       { filter: drop-shadow(0 0 50px rgba(201,168,76,0.7)); }
-        }
-
-        .logo-sub {
-            margin-top: 8px;
-            font-size: 0.75rem;
-            font-weight: 300;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            color: var(--text-dim);
-        }
-
-        .logo-divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 14px auto 0;
-        }
-
-        /* ── CARTE AUTH ── */
-        .auth-card {
+        .login-card {
+            background: rgba(0,0,0,0.75);
+            padding: 60px;
             width: 100%;
-            max-width: 440px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px 36px;
-            box-shadow:
-                0 0 60px rgba(0,0,0,0.6),
-                0 0 0 1px rgba(201,168,76,0.05),
-                inset 0 1px 0 rgba(255,255,255,0.04);
-            animation: card-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            max-width: 450px;
+            border-radius: 4px;
         }
 
-        @keyframes card-in {
-            from { opacity: 0; transform: translateY(40px) scale(0.96); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
+        .title { font-size: 2rem; font-weight: 700; margin-bottom: 28px; }
 
-        /* ── TABS ── */
-        .tabs {
-            display: flex;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 32px;
-        }
+        .form-group { margin-bottom: 16px; }
 
-        .tab {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            color: var(--text-dim);
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
-            border: 1px solid rgba(201,168,76,0.3);
-            color: var(--gold);
-            box-shadow: 0 2px 20px rgba(201,168,76,0.15);
-        }
-
-        /* ── FORMULAIRES ── */
-        .form-panel { display: none; }
-        .form-panel.active { display: block; }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-        }
-
-        .form-input {
+        .input {
             width: 100%;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            padding: 13px 16px;
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .form-input::placeholder { color: var(--text-dim); }
-
-        .form-input:focus {
-            border-color: var(--gold);
-            background: rgba(201,168,76,0.05);
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
-        }
-
-        /* ── BOUTON ── */
-        .btn-auth {
-            width: 100%;
-            padding: 15px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            padding: 16px 20px;
+            background: #333;
             border: none;
-            border-radius: 10px;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input:focus { background: #454545; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #C9A84C, #F2D98A, #C9A84C);
-            background-size: 200% 100%;
-            color: #07080A;
-            margin-top: 10px;
-            box-shadow: 0 4px 30px rgba(201,168,76,0.35);
+            margin-top: 24px;
         }
 
-        .btn-auth:hover {
-            background-position: 100% 0;
-            box-shadow: 0 6px 40px rgba(201,168,76,0.55);
-            transform: translateY(-1px);
+        .btn-submit:hover { background: #b20710; }
+
+        .card-footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #b3b3b3;
         }
 
-        .btn-auth:active { transform: translateY(0); }
-
-        .btn-auth.loading { opacity: 0.7; pointer-events: none; }
-
-        /* ── MESSAGE STATUS ── */
-        .status-msg {
-            margin-top: 16px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            text-align: center;
-            display: none;
+        .signup-now {
+            margin-top: 40px;
+            color: #737373;
+            font-size: 1rem;
         }
 
-        .status-msg.error {
-            display: block;
-            background: rgba(232,49,60,0.1);
-            border: 1px solid rgba(232,49,60,0.3);
-            color: #FF6B73;
-        }
-
-        .status-msg.success {
-            display: block;
-            background: rgba(70,211,105,0.1);
-            border: 1px solid rgba(70,211,105,0.3);
-            color: #46d369;
-        }
-
-        /* ── FOOTER ── */
-        .footer-note {
-            text-align: center;
-            margin-top: 28px;
-            font-size: 0.78rem;
-            color: var(--text-dim);
-            line-height: 1.6;
-        }
-
-        .footer-note a {
-            color: var(--gold);
+        .signup-now a {
+            color: white;
             text-decoration: none;
         }
 
-        /* ── DÉMOS VISUELLES (films en arrière-plan) ── */
-        .showcase {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1;
-            height: 180px;
-            display: flex;
-            gap: 12px;
-            padding: 0 20px;
-            overflow: hidden;
-            mask-image: linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 100%);
-            pointer-events: none;
-        }
+        .signup-now a:hover { text-decoration: underline; }
 
-        .showcase-poster {
-            flex-shrink: 0;
-            width: 90px;
-            height: 130px;
-            border-radius: 8px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            animation: float-poster 6s ease-in-out infinite;
-        }
-
-        .showcase-poster:nth-child(even) { animation-delay: -3s; margin-top: 30px; }
-
-        @keyframes float-poster {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-10px); }
-        }
-
-        /* ── RESPONSIVE MOBILE ── */
-        @media (max-width: 500px) {
-            .auth-card { padding: 30px 22px; border-radius: 16px; }
-            .logo-omega { font-size: 2rem; }
-        }
+        .status-msg { margin-top: 10px; font-size: 0.85rem; text-align: center; }
+        .error { color: var(--red); }
+        .success { color: #46d369; }
     </style>
 </head>
 <body>
 
-    <!-- Fond cinématographique -->
-    <div class="bg-scene">
-        <div class="scan-line"></div>
-        <!-- Particules générées par JS -->
+    <div class="header">
+        <a href="index.html" class="logo">DZ CINE OMEGA</a>
     </div>
 
-    <!-- Posters en bas de page -->
-    <div class="showcase" id="showcase"></div>
-
-    <!-- Layout Principal -->
-    <div class="layout">
-
-        <!-- Logo -->
-        <div class="logo-wrap">
-            <div class="logo-omega">DZ CINE OMEGA</div>
-            <div class="logo-divider"></div>
-            <div class="logo-sub">La plateforme streaming algérienne</div>
-        </div>
-
-        <!-- Carte Auth -->
-        <div class="auth-card">
-
-            <!-- Tabs Sign In / Sign Up -->
-            <div class="tabs">
-                <div class="tab active" id="tab-signin" onclick="switchTab('signin')">Connexion</div>
-                <div class="tab" id="tab-signup" onclick="switchTab('signup')">Inscription</div>
-            </div>
-
-            <!-- Formulaire Sign In -->
-            <div class="form-panel active" id="panel-signin">
+    <div class="container">
+        <div class="login-card">
+            <h1 class="title">S'identifier</h1>
+            
+            <div id="panel-signin">
                 <div class="form-group">
-                    <label class="form-label" for="signin-email">Email</label>
-                    <input class="form-input" type="email" id="signin-email" placeholder="ton@email.com">
+                    <input class="input" type="email" id="signin-email" placeholder="E-mail ou numéro de téléphone">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="signin-password">Mot de passe</label>
-                    <input class="form-input" type="password" id="signin-password" placeholder="••••••••">
+                    <input class="input" type="password" id="signin-password" placeholder="Mot de passe">
                 </div>
-                <button class="btn-auth" id="btn-signin" onclick="handleSignIn()">
-                    ▶ Accéder à la plateforme
+                <button class="btn-submit" id="btn-signin" onclick="handleSignIn()">
+                    S'identifier
                 </button>
                 <div class="status-msg" id="signin-status"></div>
+                
+                <div class="card-footer">
+                    <label><input type="checkbox" checked> Se souvenir de moi</label>
+                    <a href="#" style="color:#b3b3b3; text-decoration:none;">Besoin d'aide ?</a>
+                </div>
+
+                <div class="signup-now">
+                    Première visite sur DZ CINE ? <a href="signup.html">Inscrivez-vous maintenant</a>.
+                </div>
             </div>
-
-            <!-- Formulaire Sign Up -->
-            <div class="form-panel" id="panel-signup">
-                <div class="form-group">
-                    <label class="form-label" for="signup-username">Nom d'utilisateur</label>
-                    <input class="form-input" type="text" id="signup-username" placeholder="MonPseudo">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="signup-email">Email</label>
-                    <input class="form-input" type="email" id="signup-email" placeholder="ton@email.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="signup-password">Mot de passe</label>
-                    <input class="form-input" type="password" id="signup-password" placeholder="8 caractères minimum">
-                </div>
-                <button class="btn-auth" id="btn-signup" onclick="handleSignUp()">
-                    ✦ Créer mon compte
-                </button>
-                <div class="status-msg" id="signup-status"></div>
-            </div>
-
         </div>
-
-        <div class="footer-note">
-            En continuant, tu acceptes nos <a href="#">Conditions d'utilisation</a>.
-        </div>
-
     </div>
 
     <!-- SDK Supabase (CDN officiel) -->
@@ -411,140 +147,51 @@
         // ── CONFIGURATION SUPABASE ──
         // Ces valeurs sont publiques (anon key) = sécurisé par les politiques RLS
         // On découpe les chaînes pour éviter que le scanner de Netlify ne détecte la valeur exacte
-        const SB_URL  = ['https://', 'jxvemroylkhodwkfgfoi', '.supabase.co'].join('');
-        const SB_ANON = [
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-            '.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4dmVtcm95bGtob2R3a2ZnZm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NTQwNjcsImV4cCI6MjA5MTEzMDA2N30',
-            '._N5qv0eEFZtNvFOnUkYCRrKkgFnng7Wakm6cniOzncA'
-        ].join('');
-
         let supabase = null;
-        if (SB_URL !== 'REMPLACE_PAR_TON_SUPABASE_URL') {
+        try {
+            const SB_URL  = ['https://', 'jxvemroylkhodwkfgfoi', '.supabase.co'].join('');
+            const SB_ANON = [
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+                '.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4dmVtcm95bGtob2R3a2ZnZm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NTQwNjcsImV4cCI6MjA5MTEzMDA2N30',
+                '._N5qv0eEFZtNvFOnUkYCRrKkgFnng7Wakm6cniOzncA'
+            ].join('');
             supabase = window.supabase.createClient(SB_URL, SB_ANON);
-        }
+        } catch(e) { console.error("Supabase Init Error", e); }
 
-        // ── VÉRIFIER SI DÉJÀ CONNECTÉ ──
         async function checkSession() {
             if (!supabase) return;
             const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                window.location.href = '/home';
-            }
+            if (session) window.location.href = 'home.html';
         }
         checkSession();
 
-        // ── GESTION DES TABS ──
-        function switchTab(tab) {
-            document.getElementById('tab-signin').classList.toggle('active', tab === 'signin');
-            document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
-            document.getElementById('panel-signin').classList.toggle('active', tab === 'signin');
-            document.getElementById('panel-signup').classList.toggle('active', tab === 'signup');
-        }
-
-        // ── AFFICHER STATUS ──
         function showStatus(id, msg, type) {
             const el = document.getElementById(id);
             el.textContent = msg;
             el.className = `status-msg ${type}`;
         }
 
-        // ── SIGN IN ──
         async function handleSignIn() {
             const email = document.getElementById('signin-email').value.trim();
             const pass  = document.getElementById('signin-password').value;
             const btn   = document.getElementById('btn-signin');
 
             if (!email || !pass) return showStatus('signin-status', 'Remplis tous les champs.', 'error');
-            if (!supabase)        return showStatus('signin-status', 'Supabase non configuré — reviens plus tard.', 'error');
-
-            btn.classList.add('loading');
+            
             btn.textContent = 'Connexion...';
-
             const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
 
-            btn.classList.remove('loading');
-            btn.textContent = '▶ Accéder à la plateforme';
-
             if (error) {
+                btn.textContent = 'S\'identifier';
                 showStatus('signin-status', 'Email ou mot de passe incorrect.', 'error');
             } else {
                 showStatus('signin-status', '✅ Bienvenue ! Redirection...', 'success');
-                setTimeout(() => window.location.href = '/home', 1000);
+                setTimeout(() => window.location.href = 'home.html', 800);
             }
         }
 
-        // ── SIGN UP ──
-        async function handleSignUp() {
-            const username = document.getElementById('signup-username').value.trim();
-            const email    = document.getElementById('signup-email').value.trim();
-            const pass     = document.getElementById('signup-password').value;
-            const btn      = document.getElementById('btn-signup');
-
-            if (!username || !email || !pass) return showStatus('signup-status', 'Remplis tous les champs.', 'error');
-            if (pass.length < 8) return showStatus('signup-status', 'Mot de passe trop court (8 caractères min).', 'error');
-            if (!supabase) return showStatus('signup-status', 'Supabase non configuré — reviens plus tard.', 'error');
-
-            btn.classList.add('loading');
-            btn.textContent = 'Création...';
-
-            const { error } = await supabase.auth.signUp({
-                email, password: pass,
-                options: { data: { username } }
-            });
-
-            btn.classList.remove('loading');
-            btn.textContent = '✦ Créer mon compte';
-
-            if (error) {
-                showStatus('signup-status', error.message || 'Erreur lors de l\'inscription.', 'error');
-            } else {
-                showStatus('signup-status', '✅ Compte créé ! Vérifie ton email pour confirmer.', 'success');
-            }
-        }
-
-        // ── ENTRÉE AU CLAVIER ──
         document.addEventListener('keydown', e => {
-            if (e.key !== 'Enter') return;
-            if (document.getElementById('panel-signin').classList.contains('active')) handleSignIn();
-            else handleSignUp();
-        });
-
-        // ── ANIMATION PARTICULES ──
-        const bg = document.querySelector('.bg-scene');
-        for (let i = 0; i < 25; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            const size = Math.random() * 3 + 1;
-            p.style.cssText = `
-                width: ${size}px; height: ${size}px;
-                left: ${Math.random() * 100}%;
-                bottom: -10px;
-                animation-duration: ${Math.random() * 15 + 10}s;
-                animation-delay: ${Math.random() * 10}s;
-            `;
-            bg.appendChild(p);
-        }
-
-        // ── SHOWCASE POSTERS (démo visuelle) ──
-        const tmdbPosters = [
-            '/1E5baAaEse26fej7uHcjOgEE2t2.jpg',
-            '/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg',
-            '/qNBAXBIQlnOThrVvA6mA2B5ggkl.jpg',
-            '/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg',
-            '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
-            '/kXfKGfaEc6UopmFsGbdNrawgQTi.jpg',
-            '/4g5gK5eGWZg8swIZl6eX2AoJp8S.jpg',
-            '/tmU7GeKVybMWFButWEGl2M4GeiP.jpg',
-        ];
-
-        const showcase = document.getElementById('showcase');
-        tmdbPosters.forEach(poster => {
-            const div = document.createElement('div');
-            div.className = 'showcase-poster';
-            div.style.backgroundImage = `url(https://image.tmdb.org/t/p/w200${poster})`;
-            div.style.backgroundSize = 'cover';
-            div.style.backgroundPosition = 'center';
-            showcase.appendChild(div);
+            if (e.key === 'Enter') handleSignIn();
         });
     </script>
 </body>

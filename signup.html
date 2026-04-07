@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DZ CINE OMEGA – S'inscrire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E50914;
+            --black: #000000;
+            --dark: #141414;
+            --white: #ffffff;
+            --grey: #333333;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            padding: 25px 50px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #C9A84C;
+            text-decoration: none;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .signup-card {
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .step { font-size: 0.8rem; margin-bottom: 10px; color: #777; font-weight: 600; }
+        .title { font-size: 2rem; font-weight: 700; margin-bottom: 20px; }
+        .sub { font-size: 1.1rem; margin-bottom: 25px; line-height: 1.4; }
+
+        .form-group { margin-bottom: 20px; }
+        .input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            background: transparent;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: white;
+            outline: none;
+        }
+        .input:focus { border-color: #0071eb; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 20px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: #b20710; }
+
+        footer {
+            background: #f3f3f3;
+            color: #737373;
+            padding: 30px 50px;
+            border-top: 1px solid #dcdcdc;
+        }
+        
+        footer a { color: inherit; text-decoration: none; margin-right: 20px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">DZ CINE OMEGA</a>
+    </header>
+
+    <div class="container">
+        <div class="signup-card">
+            <p class="step">ÉTAPE 1 SUR 3</p>
+            <h1 class="title">Choisissez votre mot de passe pour commencer votre adhésion.</h1>
+            <p class="sub">Plus que quelques étapes et c'est fini ! Nous aussi, nous détestons la paperasse.</p>
+            
+            <form onsubmit="event.preventDefault(); window.location.href='home.html'">
+                <div class="form-group">
+                    <input type="email" class="input" placeholder="E-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="input" placeholder="Ajouter un mot de passe" required>
+                </div>
+                <button type="submit" class="btn-submit">Suivant</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
